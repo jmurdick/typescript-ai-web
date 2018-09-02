@@ -1,7 +1,7 @@
-What is this project?
+## What is this project? ##
 An experiment to play with AI methods in a browser, typescript, VUE.js environment.
 
-What requirements are there?
+## What requirements are there? ##
 I recommend using:
 * Yarn instead of npm - https://yarnpkg.com/lang/en/docs/install/
 * VSCode - https://code.visualstudio.com/
@@ -10,8 +10,8 @@ I recommend using:
   * TypeScript Hero Exension
   * Vetur Extension
 * Vue-js Extension for Chrome - https://chrome.google.com/webstore/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd
-How do I run it?
 
+## How do I run it? ##
 1. Open the folder in Visual Studio Code. 
 
 2. Open a powershell command prompt on the source directory to make it easier to run commands. (You can also use the integrated powershell in VSCode, but I prefer external)
