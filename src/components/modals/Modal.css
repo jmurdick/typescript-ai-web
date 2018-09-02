@@ -1,0 +1,20 @@
+.v--modal-overlay .v--modal-box {
+    display: table;
+    overflow: auto;
+  }
+  .es-popup.-es-open {
+    position: absolute;
+    background-color: transparent;
+    left: auto;
+    right: auto;
+    top: auto;
+    bottom: auto;
+    width: 100%;
+  }
+  .es-popup.-es-open .es-popup-content {
+    width: 100%;
+    margin: 0;
+  }
+  .es-popup-body div.modal-body {
+      overflow: auto;
+  }

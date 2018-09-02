@@ -1,0 +1,19 @@
+.row {
+    display: flex;
+}
+
+.column {
+    flex: 50%;
+}
+
+.columnFloatLeft {
+    float: left;
+}
+
+.left25Pct {
+    width: 25%;
+}
+
+.right75Pct {
+    width: 75%;
+}
