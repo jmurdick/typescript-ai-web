@@ -1,15 +1,36 @@
 import Vue from "vue";
-import { Component } from "vue-property-decorator";
+import { Component, Prop } from "vue-property-decorator";
 
-import Model from "@src/components/Model";
-import Node from "./Node.vue";
+import Entity from "@src/components/Entity";
 
-@Component({
-    components: { Node }
-})
+@Component({})
 export default class Tree extends Vue {
-    private mData!: Model;
+    @Prop()
+    public nodes!: Entity[];
 
-    public get trunk(): Model { return this.mData; }
-    public set trunk(value: Model) { this.mData = value; }
+    @Prop()
+    public label!: string;
+
+    @Prop()
+    public depth!: number;
+
+    private mShowChildren: boolean = false;
+    public get showChildren() { return this.mShowChildren; }
+    public set showChildren(val: boolean) { this.mShowChildren = val; }
+
+    public get iconClasses(): string {
+        return this.showChildren ? "fa-minus-square-o" : "fa-plus-square-o";
+    }
+
+    public get labelClasses(): string { 
+        return this.nodes ? "has-children" : "";
+    }
+
+    public get indent(): string { 
+        return `translate(${this.depth * 50}px)`;
+    }
+
+    public toggleChildren() {
+        this.showChildren = !this.showChildren;
+    }
 }

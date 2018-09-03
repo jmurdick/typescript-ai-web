@@ -1,4 +1,21 @@
-.tree-list ul {
-  padding-left: 16px;
-  margin: 6px 0;
+body {
+  font-family: "Open Sans", sans-serif;
+  font-size: 18px;
+  font-weight: 300;
+  line-height: 1em;
+}
+
+.container {
+  width: 300px;
+  margin: 0 auto;
+}
+
+.tree-menu .label-wrapper {
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #ccc;
+}
+
+.tree-menu .has-children {
+      cursor: pointer;
 }

@@ -31,6 +31,9 @@ new Vue({
     store: Store,
     template: "<App/>",
     components: { App },
+    beforeCreate() {
+        this.$store.dispatch("initializeStore");
+    }
 });
 
 // Container wasn't declared in the typing so added it

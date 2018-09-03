@@ -5,28 +5,32 @@ import "@src/common/extensions/String";
 import { Message } from "@src/common/models/Message";
 
 import Tree from "@src/components/Tree/Tree.vue";
-import Model from "@src/components/Model";
+import Entity from "@src/components/Entity";
+
+import { Getter, Action } from "vuex-class";
 
 @Component({
     components: { Tree },
 })
 export default class LandingPage extends Vue {
-    private mMessages: Message[] = new Array<Message>();
-    private mTreeData!: Model;
+    @Getter("getEntities") Entities!: Entity[];
+    @Getter("getMessages") Messages!: Message[];
+
+    //@Action("Store/addEntity") addEntity: any;
 
     public get messages(): Message[] {
-        return this.mMessages;
+        return this.Messages;
     }
 
     public get hasMessages(): boolean {
-        return this.mMessages.length > 0;
+        return this.Messages.length > 0;
     }
 
-    public get treeData(): Model {
-        return this.mTreeData;
+    public get nodes(): Entity[] {
+        return this.Entities;
     }
 
-    public created() {
-        this.mTreeData = JSON.parse("{\"name\":\"My Tree\",\"children\":[{\"name\":\"hello\"},{\"name\":\"wat\"},{\"name\":\"child folder\",\"children\":[{\"name\":\"child folder\",\"children\":[{\"name\":\"hello\"},{\"name\":\"wat\"}]},{\"name\":\"hello\"},{\"name\":\"wat\"},{\"name\":\"child folder\",\"children\":[{\"name\":\"hello\"},{\"name\":\"wat\"}]}]}]}") as Model;
+    public showEntity(entity: Entity) {
+        alert(entity.name);
     }
 }
