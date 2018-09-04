@@ -9,4 +9,4 @@ export default class KeyValuePair<T> {
         this.mKey = key;
         this.mValue = value;
     }
-} 
+}

@@ -7,18 +7,18 @@ export class GridMapDiagonalMoves extends GridMap {
         super();
     }
 
-    public getNeighbors(mover: GridMover, node: GridNode): Array<GridNode> {
-        let neighbors = new Array<GridNode>();
-        this.addPassableNode(mover, neighbors, node.x+1, node.y+1);
-        this.addPassableNode(mover, neighbors, node.x+1, node.y);
-        this.addPassableNode(mover, neighbors, node.x+1, node.y-1);
+    public getNeighbors(mover: GridMover, node: GridNode): GridNode[] {
+        const neighbors = new Array<GridNode>();
+        this.addPassableNode(mover, neighbors, node.x + 1, node.y + 1);
+        this.addPassableNode(mover, neighbors, node.x + 1, node.y);
+        this.addPassableNode(mover, neighbors, node.x + 1, node.y - 1);
 
-        this.addPassableNode(mover, neighbors, node.x, node.y+1);
-        this.addPassableNode(mover, neighbors, node.x, node.y-1);
+        this.addPassableNode(mover, neighbors, node.x, node.y + 1);
+        this.addPassableNode(mover, neighbors, node.x, node.y - 1);
 
-        this.addPassableNode(mover, neighbors, node.x-1, node.y+1);
-        this.addPassableNode(mover, neighbors, node.x-1, node.y);
-        this.addPassableNode(mover, neighbors, node.x-1, node.y-1);
+        this.addPassableNode(mover, neighbors, node.x - 1, node.y + 1);
+        this.addPassableNode(mover, neighbors, node.x - 1, node.y);
+        this.addPassableNode(mover, neighbors, node.x - 1, node.y - 1);
 
         return neighbors;
     }

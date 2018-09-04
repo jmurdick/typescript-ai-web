@@ -1,22 +1,48 @@
-import { GoapAction } from "./GoapAction";
 import Queue from "@src/common/types/Queue";
-import GameObject from "@src/Game/GameObject";
 import { ActionTypes } from "@src/Game/AI/ActionTypes";
 import { FSM, FSMFunction } from "@src/Game/AI/FSM/FSM";
-import IGoap from "./IGoap";
-import GoapPlanner from "./GoapPlanner";
+import GameObject from "@src/Game/GameObject";
 import KeyValuePair from "@src/Game/KeyValuePair";
+import { GoapAction } from "./GoapAction";
+import GoapPlanner from "./GoapPlanner";
+import IGoap from "./IGoap";
 
 export default class GoapAgent extends GameObject {
+    public static prettyPrintState(state: Array<KeyValuePair<any>>): string {
+        let s = "";
+        for (const kvp of state) {
+            s += `${kvp.key}:${kvp.value.toString()}, `;
+        }
+        return s;
+    }
+    public static prettyPrintQueue(actions: Queue<GoapAction>): string {
+        let s = "";
+        for (const a of actions) {
+            s += `${typeof a}-> `;
+        }
+        s += "GOAL";
+        return s;
+    }
+    public static prettyPrintArray(actions: GoapAction[]): string {
+        let s = "";
+        for (const a of actions) {
+            s += `${typeof a}, `;
+        }
+        return s;
+    }
+    public static prettyPrint(action: GoapAction): string {
+        return `${typeof action}`;
+    }
+
     private stateMachine!: FSM;
 
     private idleState!: FSMFunction ;
     private moveToState!: FSMFunction ;
     private performActionState!: FSMFunction ;
 
-    private availableActions!: Array<GoapAction>;
+    private availableActions!: GoapAction[];
     private currentActions!: Queue<GoapAction>;
-    
+
     private dataProvider!: IGoap;
     private planner!: GoapPlanner;
 
@@ -28,7 +54,7 @@ export default class GoapAgent extends GameObject {
         this.stateMachine = new FSM();
         this.availableActions = new Array<GoapAction>();
         this.currentActions = new Queue<GoapAction>();
-        // this.planner = new GoapPlanner();
+        this.planner = new GoapPlanner();
 
         this.findDataProvider();
         this.createIdleState();
@@ -47,8 +73,8 @@ export default class GoapAgent extends GameObject {
     }
 
     public getAction(type: ActionTypes): GoapAction | null {
-        for(let g of this.availableActions) {
-            if (g.actionType == type) {
+        for (const g of this.availableActions) {
+            if (g.actionType === type) {
                 return g;
             }
         }
@@ -56,8 +82,8 @@ export default class GoapAgent extends GameObject {
     }
 
     public removeAction(action: GoapAction) {
-        const index = this.availableActions.findIndex(x => x == action);
-        if (index != -1) {
+        const index = this.availableActions.findIndex((x: GoapAction) => x === action);
+        if (index !== -1) {
             this.availableActions.splice(index, 1);
         }
     }
@@ -125,7 +151,7 @@ export default class GoapAgent extends GameObject {
     }
 
     private createPerformActionState(): void {
-        let self = this;
+        const self = this;
         this.performActionState = (fsm: FSM, gameObj: GameObject) => {
             if (!self.hasActionPlan()) {
                 // Debug.Log("<color=red>Done actions</color>");
@@ -150,7 +176,7 @@ export default class GoapAgent extends GameObject {
                     return;
                 }
 
-                let inRange = action.requiresInRange() ? action.isInRange() : true;
+                const inRange = action.requiresInRange() ? action.isInRange() : true;
                 if (inRange) {
                     const success = action.perform(gameObj);
                     if (!success) {
@@ -186,31 +212,5 @@ export default class GoapAgent extends GameObject {
 		// 	availableActions.Add (a);
 		// }
 		// Debug.Log("Found actions: "+prettyPrint(actions));
-    }
-
-    public static prettyPrintState(state: Array<KeyValuePair<any>>): string {
-        let s = "";
-        for(let kvp of state) {
-            s += `${kvp.key}:${kvp.value.toString()}, `;
-        }
-        return s;
-    }
-    public static prettyPrintQueue(actions: Queue<GoapAction>): string {
-        let s = "";
-        for(let a of actions) {
-            s += `${typeof a}-> `;
-        }
-        s += "GOAL";
-        return s;
-    }
-    public static prettyPrintArray(actions: Array<GoapAction>): string {
-        let s = "";
-        for(let a of actions) {
-            s += `${typeof a}, `;
-        }
-        return s;
-    }
-    public static prettyPrint(action: GoapAction): string {
-        return `${typeof action}`;
     }
 }

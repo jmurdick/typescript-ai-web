@@ -1,6 +1,6 @@
+import Queue from "@src/common/types/Queue";
 import KeyValuePair from "@src/Game/KeyValuePair";
 import { GoapAction } from "./GoapAction";
-import Queue from "@src/common/types/Queue";
 
 export default interface IGoap {
     getWorldState(): Array<KeyValuePair<any>>;

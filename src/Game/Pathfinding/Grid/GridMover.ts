@@ -6,13 +6,14 @@ export class GridMover implements PathMover {
 
     private mUserData: object;
 
-    constructor(o: Object) {
+    constructor(o: object) {
         this.mUserData = o;
     }
 
     public get UserData(): object { return this.mUserData; }
 
     public canPass(node: GridNode): boolean {
-        return (this.passableFlags & node.passableFlags) != 0;
+        // tslint:disable-next-line:no-bitwise
+        return (this.passableFlags & node.passableFlags) !== 0;
     }
 }

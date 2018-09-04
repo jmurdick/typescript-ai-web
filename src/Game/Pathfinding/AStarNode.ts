@@ -16,16 +16,19 @@ export class AStarNode<T extends PathNode> {
     }
 
     public get Node(): T { return this.mNode; }
-    public get Cost(): number { return this.mCost; }
-    public get Depth(): number { return this.mDepth; }
-    public get Heuristic(): number { return this.mHeuristic; }
-    public get Parent(): AStarNode<T> | null { return this.mParent; }
 
+    public get Cost(): number { return this.mCost; }
     public set Cost(value: number) { this.mCost = value; }
+
+    public get Depth(): number { return this.mDepth; }
+
+    public get Heuristic(): number { return this.mHeuristic; }
     public set Heuristic(value: number) { this.mHeuristic = value; }
+
+    public get Parent(): AStarNode<T> | null { return this.mParent; }
     public set Parent(value: AStarNode<T> | null) { this.mParent = value; }
 
-    public equals(o: Object): boolean {
+    public equals(o: object): boolean {
         if (o.isTypeOf(PathNode)) {
             return this.mNode.equals(o);
         }
@@ -39,8 +42,12 @@ export class AStarNode<T extends PathNode> {
     }
 
     public compareTo(node: AStarNode<T>): number {
-        if (node.mCost == this.mCost) return 0;
-        if (node.mCost < this.mCost) return 1;
+        if (node.mCost === this.mCost) {
+            return 0;
+        }
+        if (node.mCost < this.mCost) {
+            return 1;
+        }
         return -1;
     }
 }

@@ -1,7 +1,7 @@
-import { set, empty, HashMap } from "@typed/hashmap";
+import { empty, HashMap, set } from "@typed/hashmap";
+import { Path } from "../Path";
 import { GridCoordinate } from "./GridCoordinate";
 import { GridSquare } from "./GridSquare";
-import { Path } from "../Path";
 
 export class Grid {
     private mSquares: HashMap<GridCoordinate, GridSquare>;

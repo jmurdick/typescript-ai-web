@@ -1,21 +1,21 @@
+import { empty, entries, HashMap, remove, set, size } from "@typed/hashmap";
+import { AStar } from "../AStar";
+import { Path } from "../Path";
 import { GridMover } from "./GridMover";
 import { GridNode } from "./GridNode";
-import { size, set, entries, remove, empty, HashMap } from "@typed/hashmap";
-import { Path } from "../Path";
-import { AStar } from "../AStar";
 
 export type GridColumn = HashMap<number, GridNode>;
 export function getColumnFromMap(key: number, map: HashMap<number, GridColumn>): GridColumn | null {
-    for (let entry of entries(map)) {
-        if (entry["0"] == key) {
+    for (const entry of entries(map)) {
+        if (entry["0"] === key) {
             return entry["1"];
         }
     }
     return null;
 }
 export function getNodeFromMap(key: number, map: HashMap<number, GridNode>): GridNode | null {
-    for (let entry of entries(map)) {
-        if (entry["0"] == key) {
+    for (const entry of entries(map)) {
+        if (entry["0"] === key) {
             return entry["1"];
         }
     }
@@ -69,13 +69,13 @@ export abstract class GridMap extends Map<GridMover, GridNode> {
     }
 
     public removeNode(x: number, y: number) {
-        let column = getColumnFromMap(y, this.mRows);
+        const column = getColumnFromMap(y, this.mRows);
         if (column == null) {
             return;
         }
 
         remove(x, column);
-        if (size(column) == 0) {
+        if (size(column) === 0) {
             remove(y, this.mRows);
         }
     }
@@ -85,26 +85,32 @@ export abstract class GridMap extends Map<GridMover, GridNode> {
         return aStar.findPath(mover, this, startNode, endNode, maxSearchDepth);
     }
 
-    public abstract getNeighbors(mover: GridMover, node: GridNode): Array<GridNode>;
+    public abstract getNeighbors(mover: GridMover, node: GridNode): GridNode[];
 
     public isValid(mover: GridMover, node: GridNode): boolean {
         const n = this.getNode(node.x, node.y);
-        if (n == null) return false;
+        if (n == null) {
+            return false;
+        }
         return mover.canPass(n);
     }
 
     public getCost(mover: GridMover, startNode: GridNode, endNode: GridNode): number {
-        return Math.abs(startNode.x-endNode.x) + Math.abs(startNode.y-endNode.y);
+        return Math.abs(startNode.x - endNode.x) + Math.abs(startNode.y - endNode.y);
     }
 
     public getHeuristic(mover: GridMover, startNode: GridNode, endNode: GridNode): number {
-        return Math.abs(startNode.x-endNode.x) + Math.abs(startNode.y-endNode.y);
+        return Math.abs(startNode.x - endNode.x) + Math.abs(startNode.y - endNode.y);
     }
 
-    protected addPassableNode(mover: GridMover, neighbors: Array<GridNode>, x: number, y: number) {
+    protected addPassableNode(mover: GridMover, neighbors: GridNode[], x: number, y: number) {
         const n = this.getNode(x, y);
-        if (n == null) return;
-        if (!mover.canPass(n)) return;
+        if (n == null) {
+            return;
+        }
+        if (!mover.canPass(n)) {
+            return;
+        }
         neighbors.push(n);
     }
 }

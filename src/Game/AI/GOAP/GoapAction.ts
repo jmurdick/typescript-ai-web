@@ -3,13 +3,13 @@ import KeyValuePair from "@src/Game/KeyValuePair";
 import { ActionTypes } from "../ActionTypes";
 
 export abstract class GoapAction {
+    public cost: number = 1.0;
+    public target?: GameObject | null;
+
     private preconditions!: Array<KeyValuePair<any>>;
     private effects!: Array<KeyValuePair<any>>;
     private mActionType: ActionTypes;
     private inRange: boolean = false;
-
-    public cost: number = 1.0;
-    public target?: GameObject | null;
 
     public get actionType(): ActionTypes { return this.mActionType; }
     public get Preconditions(): Array<KeyValuePair<any>> { return this.preconditions; }
@@ -46,20 +46,20 @@ export abstract class GoapAction {
     }
 
     public removePrecondition(key: string) {
-        const index = this.preconditions.findIndex((x: KeyValuePair<any>) => x.key == key);
-        if (index != -1) {
+        const index = this.preconditions.findIndex((x: KeyValuePair<any>) => x.key === key);
+        if (index !== -1) {
             this.preconditions.splice(index, 1);
         }
     }
-    
+
     public addEffect(key: string, value: any) {
         this.effects.push(new KeyValuePair<any>(key, value));
     }
 
     public removeEffect(key: string) {
-        const index = this.effects.findIndex((x: KeyValuePair<any>) => x.key == key);
-        if (index != -1) {
+        const index = this.effects.findIndex((x: KeyValuePair<any>) => x.key === key);
+        if (index !== -1) {
             this.effects.splice(index, 1);
         }
-    } 
+    }
 }

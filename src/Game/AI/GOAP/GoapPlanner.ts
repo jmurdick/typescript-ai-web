@@ -1,19 +1,19 @@
-import { GoapAction } from "./GoapAction";
+import Queue from "@src/common/types/Queue";
 import GameObject from "@src/Game/GameObject";
 import KeyValuePair from "@src/Game/KeyValuePair";
+import { GoapAction } from "./GoapAction";
 import { Node } from "./Node";
-import Queue from "@src/common/types/Queue";
 
 export default class GoapPlanner {
-    plan(agent: GameObject, availableActions: Array<GoapAction>, worldState: Array<KeyValuePair<any>>, 
-        goal: Array<KeyValuePair<any>>) {
+    public plan(agent: GameObject, availableActions: GoapAction[], worldState: Array<KeyValuePair<any>>,
+                goal: Array<KeyValuePair<any>>) {
 
-        for(let a of availableActions) {
+        for (const a of availableActions) {
             a.doReset();
         }
 
         const usableActions = new Array<GoapAction>();
-        for(let a of availableActions) {
+        for (const a of availableActions) {
             if (a.checkProceduralPrecondition(agent)) {
                 usableActions.push(a);
             }
@@ -29,7 +29,7 @@ export default class GoapPlanner {
         }
 
         let cheapest: Node | null = null;
-        for(let leaf of leaves) {
+        for (const leaf of leaves) {
             if (cheapest == null) {
                 cheapest = leaf;
             } else {
@@ -49,19 +49,19 @@ export default class GoapPlanner {
         }
 
         const queue = new Queue<GoapAction>();
-        for(let a of result) {
+        for (const a of result) {
             queue.push(a);
         }
 
         return queue;
     }
 
-    private buildGraph(parent: Node, leaves: Array<Node>, usableActions: Array<GoapAction>, 
-        goal: Array<KeyValuePair<any>>) {
-        
+    private buildGraph(parent: Node, leaves: Node[], usableActions: GoapAction[],
+                       goal: Array<KeyValuePair<any>>) {
+
         let foundOne: boolean = false;
 
-        for(let action of usableActions) {
+        for (const action of usableActions) {
             if (this.inState(action.Preconditions, parent.state)) {
                 const currentState = this.populatestate(parent.state, action.Effects);
                 const node = new Node(parent, parent.runningCost, currentState, action);
@@ -82,11 +82,11 @@ export default class GoapPlanner {
         return foundOne;
     }
 
-    private actionSubset(actions: Array<GoapAction>, removeMe: GoapAction) {
+    private actionSubset(actions: GoapAction[], removeMe: GoapAction) {
         const subset = new Array<GoapAction>();
 
-        for(let a of actions) {
-            if (a != removeMe) {
+        for (const a of actions) {
+            if (a !== removeMe) {
                 subset.push(a);
             }
         }
@@ -97,10 +97,10 @@ export default class GoapPlanner {
     private inState(test: Array<KeyValuePair<any>>, state: Array<KeyValuePair<any>>): boolean {
         let allMatch = true;
 
-        for(let t of test) {
+        for (const t of test) {
             let match = false;
-            for(let s of state) {
-                if (s == t) {
+            for (const s of state) {
+                if (s === t) {
                     match = true;
                     break;
                 }
@@ -117,15 +117,15 @@ export default class GoapPlanner {
     private populatestate(currentState: Array<KeyValuePair<any>>, stateChange: Array<KeyValuePair<any>>): Array<KeyValuePair<any>> {
         const state = new Array<KeyValuePair<any>>();
 
-        for(let s of currentState) {
+        for (const s of currentState) {
             state.push(new KeyValuePair<any>(s.key, s.value));
         }
 
-        for(let change of stateChange) {
+        for (const change of stateChange) {
             let exists = false;
 
-            for(let s of state) {
-                if (s == change) {
+            for (const s of state) {
+                if (s === change) {
                     exists = true;
                     break;
                 }

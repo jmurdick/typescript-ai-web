@@ -1,5 +1,5 @@
-import { Labourer } from "./Labourer";
 import KeyValuePair from "@src/Game/KeyValuePair";
+import { Labourer } from "./Labourer";
 
 export class Logger extends Labourer {
     public createGoalState(): Array<KeyValuePair<any>> {

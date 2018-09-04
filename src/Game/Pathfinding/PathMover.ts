@@ -1,3 +1,2 @@
-export interface PathMover {
-    
-}
+// tslint:disable-next-line:no-empty-interface
+export interface PathMover { /* nothing */ }

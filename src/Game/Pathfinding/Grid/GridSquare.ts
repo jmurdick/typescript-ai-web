@@ -1,3 +1,1 @@
-export class GridSquare {
-    
-}
+export class GridSquare { /* nothing */ }

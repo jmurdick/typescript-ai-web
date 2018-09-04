@@ -1,31 +1,32 @@
+import Queue from "@src/common/types/Queue";
+import { GoapAction } from "@src/Game/AI/GOAP/GoapAction";
 import IGoap from "@src/Game/AI/GOAP/IGoap";
+import GameObject from "@src/Game/GameObject";
 import KeyValuePair from "@src/Game/KeyValuePair";
 import { Backpack } from "@src/Game/Objects/Backpack";
-import { GoapAction } from "@src/Game/AI/GOAP/GoapAction";
-import Queue from "@src/common/types/Queue";
-import GameObject from "@src/Game/GameObject";
 import { Tool } from "@src/Game/Objects/Tool";
 
 export abstract class Labourer extends GameObject implements IGoap {
     public backpack!: Backpack;
     public moveSpeed: number = 1;
 
-    public start() {
+    public start(): void {
 		if (this.backpack == null) {
 			this.backpack = new Backpack();
 		}
+
 		if (this.backpack.tool == null) {
 			this.backpack.tool = new Tool();
 		}
     }
 
-    public update() {
-
+    public update(): void {
+        /* nothing */
     }
 
     public getWorldState(): Array<KeyValuePair<any>> {
         const worldData = new Array<KeyValuePair<any>>();
-        
+
         worldData.push(new KeyValuePair<any>("hasOre", (this.backpack.numOre > 0)));
         worldData.push(new KeyValuePair<any>("hasLogs", (this.backpack.numLogs > 0)));
         worldData.push(new KeyValuePair<any>("hasFirewood", (this.backpack.numFirewood > 0)));
@@ -37,7 +38,7 @@ export abstract class Labourer extends GameObject implements IGoap {
     public abstract createGoalState(): Array<KeyValuePair<any>>;
 
     public planFailed(failedGoal: Array<KeyValuePair<any>>): void {
-        // Not handling this here since we are making sure our goals will always succeed.
+		// Not handling this here since we are making sure our goals will always succeed.	
 		// But normally you want to make sure the world state has changed before running
 		// the same goal again, or else it will just fail.
     }
@@ -65,7 +66,7 @@ export abstract class Labourer extends GameObject implements IGoap {
 		// TODO Fix this!
 		// float step = moveSpeed * Time.deltaTime;
 		// gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, nextAction.target.transform.position, step);
-		
+
 		// if (gameObject.transform.position.Equals(nextAction.target.transform.position) ) {
 		// 	// we are at the target location, we are done
 		// 	nextAction.setInRange(true);

@@ -1,5 +1,5 @@
 export class Path<T> {
-    private mPath: Array<T>;
+    private mPath: T[];
 
     constructor() {
         this.mPath = new Array<T>();
@@ -18,7 +18,7 @@ export class Path<T> {
     }
 
     public *[Symbol.iterator]() {
-        for(let i=0; i<this.mPath.length; i++) {
+        for (let i = 0; i < this.mPath.length; i++) {
             yield [i, this.mPath[i]];
         }
     }

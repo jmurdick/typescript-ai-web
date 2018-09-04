@@ -1,13 +1,14 @@
+import { AStarNode } from "./AStarNode";
+import { Map } from "./Map";
+import { Path } from "./Path";
 import { PathMover } from "./PathMover";
 import { PathNode } from "./PathNode";
-import { Path } from "./Path";
-import { AStarNode } from "./AStarNode";
-import { entries, set, empty, HashMap } from "@typed/hashmap";
-import { Map } from "./Map";
+
+import { empty, entries, HashMap, set } from "@typed/hashmap";
 
 export function getNodeFromMap<N extends PathNode>(key: N, map: HashMap<N, AStarNode<N>>): AStarNode<N> | null {
-    for (let entry of entries(map)) {
-        if (entry["0"] == key) {
+    for (const entry of entries(map)) {
+        if (entry["0"] === key) {
             return entry["1"];
         }
     }
@@ -24,18 +25,18 @@ export class AStar<M extends PathMover, N extends PathNode> {
             return null;
         }
 
-        let closed = new Array<AStarNode<N>>();
-        let open = new Array<AStarNode<N>>();
-        let allNodes = empty<N, AStarNode<N>>();
+        const closed = new Array<AStarNode<N>>();
+        const open = new Array<AStarNode<N>>();
+        const allNodes = empty<N, AStarNode<N>>();
 
-        let startAStarNode = new AStarNode<N>(startNode, 0, 0, null);
+        const startAStarNode = new AStarNode<N>(startNode, 0, 0, null);
         open.push(startAStarNode);
 
         let targetNode: AStarNode<N> | null = null;
         let maxDepth = 0;
 
-        while ((maxDepth < maxSearchDepth) && (open.length != 0)) {
-            let current: AStarNode<N> = open[0];
+        while ((maxDepth < maxSearchDepth) && (open.length !== 0)) {
+            const current: AStarNode<N> = open[0];
             if (current.equals(endNode)) {
                 targetNode = current;
                 break;
@@ -44,8 +45,8 @@ export class AStar<M extends PathMover, N extends PathNode> {
             open.remove(current);
             closed.push(current);
 
-            let neighbors = map.getNeighbors(mover, current.Node);
-            for(let node of neighbors) {
+            const neighbors = map.getNeighbors(mover, current.Node);
+            for (const node of neighbors) {
                 if (!map.isValid(mover, node)) {
                     continue;
                 }
@@ -56,7 +57,7 @@ export class AStar<M extends PathMover, N extends PathNode> {
                     set(node, neighbor, allNodes);
                 }
 
-                let nextStepCost = current.Cost + map.getCost(mover, current.Node, neighbor.Node);
+                const nextStepCost = current.Cost + map.getCost(mover, current.Node, neighbor.Node);
                 if (nextStepCost < neighbor.Cost) {
                     if (open.has(neighbor)) {
                         open.remove(neighbor);
@@ -70,7 +71,7 @@ export class AStar<M extends PathMover, N extends PathNode> {
                     neighbor.Cost = nextStepCost;
                     neighbor.Heuristic = map.getHeuristic(mover, current.Node, endNode);
                     neighbor.Parent = current;
-                    maxDepth = Math.max(maxDepth, current.Depth+1);
+                    maxDepth = Math.max(maxDepth, current.Depth + 1);
                     open.push(neighbor);
                 }
             }
@@ -80,7 +81,7 @@ export class AStar<M extends PathMover, N extends PathNode> {
             return null;
         }
 
-        let path = new Path<N>();
+        const path = new Path<N>();
         let target: AStarNode<N> | null = targetNode;
         while (target != null) {
             path.prepend(target.Node);
