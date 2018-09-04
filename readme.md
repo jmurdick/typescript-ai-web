@@ -3,12 +3,13 @@ An experiment to play with AI methods in a browser, typescript, VUE.js environme
 
 ## What requirements are there? ##
 I recommend using:
-* Yarn instead of npm - https://yarnpkg.com/lang/en/docs/install/
+* Node.js - https://nodejs.org/en/
 * VSCode - https://code.visualstudio.com/
   * TSLint Extension
   * TSLint Vue Extension
   * TypeScript Hero Exension
   * Vetur Extension
+* Yarn instead of npm - https://yarnpkg.com/lang/en/docs/install/
 * Vue-js Extension for Chrome - https://chrome.google.com/webstore/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd
 
 ## How do I run it? ##

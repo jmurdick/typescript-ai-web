@@ -3,7 +3,7 @@ import Vuex from "vuex";
 import vuexI18n from "vuex-i18n";
 
 import { Message } from "@src/common/models/Message";
-import Entity from "@src/components/Entity";
+import Entity from "@src/common/models/Entity";
 
 Vue.use(Vuex);
 
@@ -97,12 +97,13 @@ export const Store = new Vuex.Store({
             ];
 
             commit("entities", json);
-        }
+        },
         // async toggleMessageSort({ state, commit })
         // async sortMessagesBy
         // async applyMessagesFilter
-        // async addMessage
-        
+        async addMessage({ state, commit }, message: Message) {
+            commit("messages", message);
+        }
         // async toggleEntitySort
         // async sortEntitiesBy
         // async applyEntitiesFIlter
@@ -115,3 +116,5 @@ export const Store = new Vuex.Store({
 });
 
 Vue.use(vuexI18n.plugin, Store);
+
+export default Store;

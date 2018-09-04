@@ -5,7 +5,7 @@ import "@src/common/extensions/String";
 import { Message } from "@src/common/models/Message";
 
 import Tree from "@src/components/Tree/Tree.vue";
-import Entity from "@src/components/Entity";
+import Entity from "@src/common/models/Entity";
 
 import { Getter, Action } from "vuex-class";
 

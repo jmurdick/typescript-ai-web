@@ -1,4 +1,11 @@
 export class Message {
-    public class?: string;
+    public class?: MessageClass;
     public value?: string;
+}
+
+export enum MessageClass {
+    Debug,
+    Error,
+    AgentMajor,
+    AgentMinor
 }

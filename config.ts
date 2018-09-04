@@ -1,12 +1,16 @@
 declare global {
     // tslint:disable-next-line:interface-name
     interface Window {
-        serviceUrl: string;
+        gridSizeX: number;
+        gridSizeY: number;
+        aiEventInterval: number;
     }
 }
 
 export const Config = {
-    serviceUrl: window.serviceUrl ? window.serviceUrl : window.location.origin,
+    gridSizeX: 100,
+    gridSizeY: 100,
+    aiEventInterval: 250,
 };
 
 export default Config;

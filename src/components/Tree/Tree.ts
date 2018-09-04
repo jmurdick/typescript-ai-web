@@ -1,7 +1,7 @@
 import Vue from "vue";
 import { Component, Prop } from "vue-property-decorator";
 
-import Entity from "@src/components/Entity";
+import Entity from "@src/common/models/Entity";
 
 @Component({})
 export default class Tree extends Vue {
