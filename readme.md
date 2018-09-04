@@ -24,3 +24,14 @@ That should install everything else such as NPM and all the other node modules
 Then you can browse as usual. 
 
 5. "yarn jest" will run any unit tests in the project.
+
+## Credits ##
+* Brent Owens
+  * GOAP initial implementation (for inspiration and as a starting point to begin)
+  * [Goal Oriented Action Planning for a Smarter AI](https://gamedevelopment.tutsplus.com/tutorials/goal-oriented-action-planning-for-a-smarter-ai--cms-20793)
+  * Ported from C#/Unity3D
+* WarMage: Battlegrounds Team 
+  * Jon, Paul, Jeremy, Tim, Aaron, Ken, David, Damon, and others I'm sure I've forgotten
+  * A*Star Pathfinding on a Grid (with diagonal support)
+  * Ported from Java
+* Evan You - [Vue.JS](https://vuejs.org/) 
