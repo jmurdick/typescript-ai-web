@@ -1,12 +1,12 @@
+import { Message, MessageClass } from "@src/common/models/Message";
 import { Guid } from "@src/common/types/Guid";
 import { EventBus } from "@src/EventBus";
-import { Message, MessageClass } from "@src/common/models/Message";
 
 export default class Entity extends Object {
     public id: Guid;
-    public name: string;  
-    public children!: Array<Entity>;
-    
+    public name: string;
+    public children!: Entity[];
+
     constructor() {
         super();
         this.id = Guid.newGuid();
@@ -14,6 +14,10 @@ export default class Entity extends Object {
         this.children = new Array<Entity>();
 
         EventBus.$on("engine-ai-execute", this.onExecute);
+    }
+
+    public toString(): string {
+        return `${this.name} [${this.id.toString()}] [${this.constructor.name}]`;
     }
 
     protected onExecute(): void {

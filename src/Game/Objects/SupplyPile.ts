@@ -1,4 +1,4 @@
-import GameObject from "@src/Game/GameObject";
+import { GameObject } from "@src/Game/GameObject";
 
 export class SupplyPile extends GameObject {
     public numTools!: number; // for mining ore and chopping logs

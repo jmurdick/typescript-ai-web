@@ -1,7 +1,7 @@
 import Queue from "@src/common/types/Queue";
 import { GoapAction } from "@src/Game/AI/GOAP/GoapAction";
 import IGoap from "@src/Game/AI/GOAP/IGoap";
-import GameObject from "@src/Game/GameObject";
+import { GameObject } from "@src/Game/GameObject";
 import KeyValuePair from "@src/Game/KeyValuePair";
 import { Backpack } from "@src/Game/Objects/Backpack";
 import { Tool } from "@src/Game/Objects/Tool";

@@ -4,7 +4,7 @@ import { Log } from "@src/common/util/Log";
 
 Log.EnableTodoLogging = true;
 
-import Engine from "@src/Game/Engine";
+import Engine from "@src/components/Engine";
 
 @Component
 export default class App extends Vue {

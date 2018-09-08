@@ -1,5 +1,5 @@
 import Queue from "@src/common/types/Queue";
-import GameObject from "@src/Game/GameObject";
+import { GameObject } from "@src/Game/GameObject";
 import KeyValuePair from "@src/Game/KeyValuePair";
 import { GoapAction } from "./GoapAction";
 import { Node } from "./Node";

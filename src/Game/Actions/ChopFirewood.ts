@@ -1,5 +1,5 @@
 import { GoapAction } from "@src/Game/AI/GOAP/GoapAction";
-import GameObject from "@src/Game/GameObject";
+import { GameObject } from "@src/Game/GameObject";
 
 export class ChopFirewood extends GoapAction {
     public workDuration: number = 2;

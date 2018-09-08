@@ -1,7 +1,7 @@
 import Queue from "@src/common/types/Queue";
 import { ActionTypes } from "@src/Game/AI/ActionTypes";
 import { FSM, FSMFunction } from "@src/Game/AI/FSM/FSM";
-import GameObject from "@src/Game/GameObject";
+import { GameObject } from "@src/Game/GameObject";
 import KeyValuePair from "@src/Game/KeyValuePair";
 import { GoapAction } from "./GoapAction";
 import GoapPlanner from "./GoapPlanner";

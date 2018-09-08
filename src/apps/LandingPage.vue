@@ -1,10 +1,10 @@
 <template>
     <div class="row">
         <div class="column"> 
-            <h2>Entities</h2>
+            <h2>Game Objects</h2>
             <ul>
                 <li v-for="(node, index) of nodes" :key="index">
-                    <a @click="showEntity(node)">{{node.name}}</a>
+                    <a :class="node.isEnabled ? '' : 'disabled'" @click="showObject(node)">{{node.name}}</a>
                 </li>
             </ul>
         </div>
@@ -32,6 +32,8 @@
                 </tbody>
             </table>
         </div>
+
+        <div class="hidden"><engine></engine></div>
     </div>
 </template>
 

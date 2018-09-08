@@ -1,4 +1,4 @@
-import GameObject from "@src/Game/GameObject";
+import { GameObject } from "@src/Game/GameObject";
 import KeyValuePair from "@src/Game/KeyValuePair";
 import { ActionTypes } from "../ActionTypes";
 

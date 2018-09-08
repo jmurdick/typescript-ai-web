@@ -1,5 +1,5 @@
 import { Stack } from "@src/common/types/Stack";
-import GameObject from "@src/Game/GameObject";
+import { GameObject } from "@src/Game/GameObject";
 
 export type FSMFunction = (fsm: FSM, gameObject: GameObject) => void;
 

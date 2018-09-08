@@ -1,4 +1,4 @@
-import GameObject from "@src/Game/GameObject";
+import { GameObject } from "@src/Game/GameObject";
 import { FSM } from "./FSM";
 
 export interface FSMState {

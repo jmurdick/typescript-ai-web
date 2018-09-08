@@ -2,21 +2,22 @@ import Entity from "@src/common/models/Entity";
 import { EventBus } from "@src/EventBus";
 import { IHasComponents } from "@src/Game/Interfaces/IHasComponents";
 import { IIsListener } from "@src/Game/Interfaces/IIsListener";
-import { Component } from "./Component";
 
-export class GameObject extends Entity implements IHasComponents, IIsListener {
+export class Component extends Entity implements IHasComponents, IIsListener {
     public static instantiate(...args: any[]): Component {
         // TODO Finish.  Question, how do I pass in state?
         // TODO On instantiation, call the start() method
         // TODO Arguments must include:
+        //      ComponentType?
+        //      Parent GameObject or Component (component is added to it)
         //      Name
-        //      (Optional) Parent GameObject
         //      Any components to add or handle that somewhere else?
         // TODO: Should there be a clone method as well?
         throw Error("Not yet implemented!");
     }
 
     private mComponents: Component[];
+    private mParent!: Component | null;
     private mEnabled!: boolean;
 
     constructor() {
@@ -25,6 +26,9 @@ export class GameObject extends Entity implements IHasComponents, IIsListener {
         this.mComponents = new Array<Component>();
         EventBus.$on("on-game-tick", this.update);
     }
+
+    public get Parent(): Component | null { return this.mParent; }
+    public set Parent(value: Component | null) { this.mParent = value; }
 
     public get isEnabled(): boolean { return this.mEnabled; }
     public set isEnabled(value: boolean) { this.mEnabled = value; }
@@ -45,7 +49,8 @@ export class GameObject extends Entity implements IHasComponents, IIsListener {
         return found;
     }
     public getComponentInParent(name: string): Component | null {
-        return null;
+        if (this.mParent == null) { return null; }
+        return this.mParent.getComponent(name);
     }
 
     public hasComponent(name: string): boolean {
@@ -75,7 +80,8 @@ export class GameObject extends Entity implements IHasComponents, IIsListener {
         return childComponents;
     }
     public getComponentsInParent(): Component[] {
-        return new Array<Component>();
+        if (this.mParent == null) { return new Array<Component>(); }
+        return this.mParent.getComponents();
     }
 
     public start(): void {

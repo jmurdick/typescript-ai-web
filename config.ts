@@ -3,14 +3,14 @@ declare global {
     interface Window {
         gridSizeX: number;
         gridSizeY: number;
-        aiEventInterval: number;
+        gameTickInterval: number;
     }
 }
 
 export const Config = {
     gridSizeX: 100,
     gridSizeY: 100,
-    aiEventInterval: 250,
+    gameTickInterval: 250,
 };
 
 export default Config;
